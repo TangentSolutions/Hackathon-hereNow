@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
     def __unicode__(self):
         return self.username
@@ -38,3 +39,4 @@ class Location(models.Model):
     time = models.DateTimeField()
     is_safe = models.NullBooleanField (null=True, blank=True, default=None)
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="location_user")
+

@@ -5,5 +5,5 @@ from django.views import View
 
 class GeofenceViewSet(View):
 
-    def create(self, request):
+    def post(self, request):
         return HttpResponse(request)

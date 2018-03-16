@@ -5,6 +5,6 @@ from api.views import GeofenceViewSet
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^geofence/', GeofenceViewSet),
+    url(r'^geofence/', GeofenceViewSet.as_view()),
     url(r'^api-auth/', include('rest_framework.urls'))
 ]

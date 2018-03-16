@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from api.models import GeoFencing, User, Location
+from account.models import UserDetail
+
 
 class GeoFenceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,9 +15,9 @@ class LocationSerializer(serializers.ModelSerializer):
         model = Location
         fields = '__all__'
 
-        
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('username', 'name', 'email', 'address', 'phone', 'related_users', 'created', 'role')
+        model = UserDetail
+        exclude = ('date_added', )
 

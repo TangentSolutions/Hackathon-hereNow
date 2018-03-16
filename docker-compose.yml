@@ -1,13 +1,17 @@
-version: "3"
+version: '2.1'
 services:
   db:
     restart: on-failure:10
     image: postgres:9.5
     networks:
       - default
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - "db-volume:/var/lib/postgresql/data"
-
   web:
     restart: on-failure:10
     build: .
@@ -15,6 +19,9 @@ services:
       - .:/code
     networks:
       - default
+    depends_on:
+      db:
+        condition: service_healthy
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8008:8000"

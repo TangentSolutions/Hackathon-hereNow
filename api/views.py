@@ -1,14 +1,27 @@
-from rest_framework import viewsets, mixins
-from rest_framework.decorators import list_route
+from django.contrib.auth.models import User
+from rest_framework import viewsets, mixins, permissions
+from rest_framework.decorators import detail_route
+from rest_framework.response import Response
 
 from account.models import UserDetail
 from api.models import Location
 from api.serializers import LocationSerializer, UserSerializer
 
 
-class LocationViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class LocationViewSet(mixins.CreateModelMixin,
+                      mixins.RetrieveModelMixin,
+                      mixins.ListModelMixin,
+                      viewsets.GenericViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+
+    @detail_route(methods=['get'])
+    def user(self, request, pk=None):
+        locations = Location.objects.filter(user__id=pk)
+
+        serializer = LocationSerializer(
+            locations, many=True, context={'request': request})
+        return Response(serializer.data)
 
 
 class UserViewSet(viewsets.ModelViewSet):

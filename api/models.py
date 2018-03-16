@@ -16,6 +16,7 @@ class User(models.Model):
     token = models.CharField(max_length=255, null=True, blank=True, default=None)
     last_modified = models.DateTimeField(auto_now=True)
 
+
 class GeoFencing(models.Model):
     def __unicode__(self):
         return self.username
@@ -27,12 +28,14 @@ class GeoFencing(models.Model):
     end_time = models.DateTimeField()
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="geo_fencing_user")
 
-class location(models.Model):
+
+class Location(models.Model):
     def __unicode__(self):
         return "({0}, {1})".format(self.lat, self.lon)
     
-    lon = models.FloatField()
+    long = models.FloatField()
     lat = models.FloatField()
     time = models.DateTimeField()
     is_safe = models.NullBooleanField (null=True, blank=True, default=None)
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="location_user")
+

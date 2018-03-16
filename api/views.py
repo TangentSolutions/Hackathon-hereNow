@@ -1,9 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views import View
+from rest_framework import viewsets, mixins
+from api.models import GeoFencing
+from api.serializers import GeoFenceSerializer
 
-
-class GeofenceViewSet(View):
-
-    def post(self, request):
-        return HttpResponse(request)
+class GeofenceViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = GeoFencing.objects.all()
+    serializer_class = GeoFenceSerializer

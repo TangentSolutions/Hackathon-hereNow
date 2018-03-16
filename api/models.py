@@ -18,6 +18,15 @@ class User(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
 
+
+# class UserRole(models.Model):
+#     name = models.CharField(max_length=50)
+#     description = models.CharField(max_length=2000)
+
+
+# class User(models.Model):
+#     user = models.OneToOneField(settings.Auth)
+
 class GeoFencing(models.Model):
     def __unicode__(self):
         return self.username

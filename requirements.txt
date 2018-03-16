@@ -2,3 +2,4 @@ django
 markdown
 django-filter
 djangorestframework
+psycopg2

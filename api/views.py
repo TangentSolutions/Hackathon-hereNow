@@ -1,5 +1,8 @@
 from rest_framework import viewsets, mixins
-from api.models import Location, User
+from rest_framework.decorators import list_route
+
+from account.models import UserDetail
+from api.models import Location
 from api.serializers import LocationSerializer, UserSerializer
 
 
@@ -12,5 +15,12 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all()
+    queryset = UserDetail.objects.all()
     serializer_class = UserSerializer
+
+
+class UserAuthView(viewsets.GenericViewSet):
+
+    def post(self, request):
+        pass
+

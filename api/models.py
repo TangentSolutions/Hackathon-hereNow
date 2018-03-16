@@ -19,5 +19,5 @@ class Location(models.Model):
     lat = models.FloatField()
     time = models.DateTimeField()
     is_safe = models.NullBooleanField (null=True, blank=True, default=None)
-    user = models.ManyToManyField(User, related_name="location_user")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="location_user")
 
